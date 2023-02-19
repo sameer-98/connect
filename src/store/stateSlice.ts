@@ -1,4 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { PaletteMode } from "@mui/material";
+
+
 
 const initialState = {
     mode: 'light',
@@ -11,9 +14,12 @@ const stateSlice = createSlice({
     reducers: {
         setMode: (state) => {
             state.mode = state.mode === 'light' ? 'dark': 'light'
-        }
+        },
+        setCurrentUser: (state, action) => {
+            state.currentUser = action.payload
+        } 
     }
 })
 
 export const stateReducer = stateSlice.reducer;
-export const {setMode} = stateSlice.actions; 
+export const {setMode, setCurrentUser} = stateSlice.actions; 
