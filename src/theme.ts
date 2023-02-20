@@ -1,4 +1,10 @@
-import { PaletteMode } from "@mui/material"
+import { PaletteMode, ThemeOptions } from "@mui/material"
+
+declare module '@mui/material/styles'{
+  interface TypeBackground{
+    alt: string
+  }
+}
 
 const colorTokens = {
     primary: {
