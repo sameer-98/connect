@@ -42,7 +42,7 @@ const colorTokens = {
     },
 }
 
-export const themeSettings = (mode: PaletteMode) => {
+export const themeSettings = (mode: PaletteMode): ThemeOptions => {
     return {
         palette: {
             mode: mode,
@@ -62,8 +62,8 @@ export const themeSettings = (mode: PaletteMode) => {
                     main: colorTokens.primary[500]
                 },
                 background:{
-                    default: colorTokens.white[500],
-                    alt: colorTokens.white[400]
+                    default: colorTokens.white[100],
+                    alt: colorTokens.white[500]
                 }
 
             })
