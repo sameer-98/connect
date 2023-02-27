@@ -49,7 +49,9 @@ export const themeSettings = (mode: PaletteMode): ThemeOptions => {
             //palette for dark mode
             ...(mode === 'dark' ? {
                 primary:{
-                    main: colorTokens.primary[500]
+                    main: colorTokens.primary[500],
+                    contrastText: colorTokens.white[100]
+                
                 },
                 background: {
                     default: colorTokens.black[500],
@@ -59,7 +61,8 @@ export const themeSettings = (mode: PaletteMode): ThemeOptions => {
             //palette for light mode
             {
                 primary: {
-                    main: colorTokens.primary[500]
+                    main: colorTokens.primary[500],
+                    contrastText: colorTokens.white[100]
                 },
                 background:{
                     default: colorTokens.white[100],

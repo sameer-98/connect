@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../../store/stateSlice";
 import { Button, Box, useMediaQuery , useTheme, Typography} from "@mui/material";
 import { Navigation } from "../../components/navbar/navigation.component";
-
+import { SignIn } from "../../components/sign-in-component/sign-in-form.component";
 
 export const Authentication = () => {
     const theme = useTheme()
@@ -19,11 +19,15 @@ export const Authentication = () => {
         <Navigation/>
         <Box>
             <Box
-            width={isNonMobileScreens ? "50%" : "90%"}
-            p='2rem'
+            width={isNonMobileScreens ? "30%" : "90%"}
+            p='4rem'
             m='2rem auto'
             borderRadius='1.5rem'
-            bgcolor={theme.palette.background.alt}>
+            bgcolor={theme.palette.background.alt}
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center">
             
             <Typography
             textAlign="center"
@@ -32,7 +36,7 @@ export const Authentication = () => {
             sx={{mb: "1.5rem"}}>
                 Welcome To Connect, Login Now and Connect
             </Typography>
-
+            <SignIn/>
             </Box>
         </Box>
     </div>)

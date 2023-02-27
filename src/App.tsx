@@ -6,6 +6,7 @@ import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { themeSettings } from './theme';
 import { selectCurrentMode } from './store/state.selector';
 import { useSelector } from 'react-redux';
+import { Home } from './routes/home/home.component';
 
 const App = () => {
   const mode = useSelector(selectCurrentMode)
@@ -18,6 +19,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Authentication/>}/>
         <Route path='/register' element={<Registration/>}/>
+        <Route path='/home' element={<Home/>}/>
       </Routes>
     </BrowserRouter>
   </ThemeProvider>
