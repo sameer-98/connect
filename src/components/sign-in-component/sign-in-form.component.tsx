@@ -15,11 +15,11 @@ const initialValues: InitialSignInValues = {
     email: '',
     password: ''
 }
-
+// TODO: Create a submit method for sign in
 const onSubmit = (values: InitialSignInValues) => {
     console.log('Form data', values)
 }
-
+// Validation schema object with yup
 const validationSchema = Yup.object({
     email: Yup.string().email('Invalid email format').required('Required'),
     password: Yup.string().required('Required')
@@ -36,7 +36,6 @@ export const SignIn = () => {
         }
     }
     
-    
     // Use formik to handle forms
     const formik = useFormik({
         initialValues,
@@ -52,7 +51,8 @@ export const SignIn = () => {
                     <Typography 
                     variant="h6"
                     textAlign="center">
-                        Not a member yet? <Link color='inherit' href="#">sign up here</Link>
+                        Not a member yet? <Link color='inherit'    style={{ cursor: 'pointer' }}
+                        onClick={() => {navigate('/register')}}>sign up here</Link>
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>

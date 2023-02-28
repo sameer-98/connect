@@ -1,17 +1,11 @@
-import { signInWithGooglePopup } from "../../utils/firebase.utils"
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrentUser } from "../../store/stateSlice";
-import { Button, Box, useMediaQuery , useTheme, Typography} from "@mui/material";
+import {  Box, useMediaQuery , useTheme, Typography} from "@mui/material";
 import { Navigation } from "../../components/navbar/navigation.component";
 import { SignIn } from "../../components/sign-in-component/sign-in-form.component";
 
 export const Authentication = () => {
     const theme = useTheme()
     const isNonMobileScreens = useMediaQuery('(min-width: 1000px)')
-    const googleSignIn = async() => {
-        const response = await signInWithGooglePopup();
-        console.log(response)
-    }
+    
 
     console.log(isNonMobileScreens)
    return (
