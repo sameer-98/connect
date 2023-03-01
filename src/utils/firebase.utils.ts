@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import {getAuth, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider, User} from 'firebase/auth';
+import {getAuth, 
+  signInWithPopup,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  User,
+  createUserWithEmailAndPassword} from 'firebase/auth';
 import {
   getFirestore,
   doc,
@@ -45,7 +50,8 @@ export const signInWithFacebookPopup = () => signInWithPopup(auth, facebookProvi
 
 export const db = getFirestore()
 
-export const createUserDocumentFromAuth  = async(userAuth: User) => {
+export const createUserDocumentFromAuth  = async(userAuth: User, 
+  additionalData = {}) => {
   const userDoc = doc(db, 'users', userAuth.uid)
 
   const userSnapshot = await getDoc(userDoc);
@@ -58,7 +64,8 @@ export const createUserDocumentFromAuth  = async(userAuth: User) => {
       await setDoc(userDoc, {
         displayName,
         email,
-        messages
+        messages,
+        ...additionalData,
       })
     }
     catch(error){
@@ -68,4 +75,8 @@ export const createUserDocumentFromAuth  = async(userAuth: User) => {
 
   // if user data exists
   return userDoc;
+}
+
+export const createAuthUserWithEmailAndPassword = async(email: string, password:string) => {
+  return await createUserWithEmailAndPassword(auth, email, password)
 }

@@ -7,8 +7,8 @@ import * as Yup from 'yup';
 
 // types for initial form values
 type InitialSignInValues = {
-    email: String | null;
-    password: String | null;
+    email: String;
+    password: String;
 }
 // declare initial values for form
 const initialValues: InitialSignInValues = {
@@ -66,7 +66,7 @@ export const SignIn = () => {
                     value={formik.values.email}
                     onBlur={formik.handleBlur}
                     error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
+                    helperText={(formik.touched.email && formik.errors.email) ? <>{formik.errors.email}</> : null}
                     />
                 </Grid>
                 <Grid item xs={12}>
@@ -80,7 +80,7 @@ export const SignIn = () => {
                     value={formik.values.password}
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     onBlur={formik.handleBlur}
-                    helperText={formik.touched.password && formik.errors.password}
+                    helperText={(formik.touched.password && formik.errors.password) ? <>{formik.errors.password}</> : null}
                     />               
                 </Grid>
                 <Grid item xs={12}>
@@ -89,7 +89,7 @@ export const SignIn = () => {
                         fullWidth
                         variant="contained"
                         sx={{
-                            p:2,
+                            p:1.5,
                             fontSize:'1.25rem',
                             fontWeight: '700'
                         }}
