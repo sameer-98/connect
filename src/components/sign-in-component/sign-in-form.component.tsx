@@ -1,9 +1,9 @@
 import { TextField, Grid, Button, Typography, Link, IconButton } from "@mui/material";
 import { Facebook, Google } from "@mui/icons-material";
-import { createUserDocumentFromAuth, signInWithGooglePopup } from "../../utils/firebase.utils";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
+import { useDispatch } from "react-redux";
 
 // types for initial form values
 type InitialSignInValues = {
@@ -27,13 +27,14 @@ const validationSchema = Yup.object({
 
 export const SignIn = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleGoogleSignIn = () => {
+        // dispatch googleSignInStart action creator
+    }
 
     const handleSignIn = async() => {
-        const {user} = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(user);
-        if(userDocRef){
-            navigate('/home')
-        }
+        // dispatch signInStart action creator 
     }
     
     // Use formik to handle forms
@@ -98,7 +99,7 @@ export const SignIn = () => {
                     </Button>
                 </Grid>
                 <Grid item xs ={12} textAlign="center">
-                    <IconButton onClick={handleSignIn}>
+                    <IconButton onClick={handleGoogleSignIn}>
                     <Google 
                         sx={{color: "red", fontSize: "2.5rem"}}/>
                     </IconButton>

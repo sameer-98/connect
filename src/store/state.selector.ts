@@ -1,3 +1,3 @@
 export const selectCurrentMode = (state: any) => state.mode;
 
-export const selectCurrentUser = (state: any) => state.currentUser;
+export const selectCurrentUser = (state: any) => state.user.currentUser;

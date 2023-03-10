@@ -4,7 +4,9 @@ import {getAuth,
   GoogleAuthProvider,
   FacebookAuthProvider,
   User,
-  createUserWithEmailAndPassword} from 'firebase/auth';
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut} from 'firebase/auth';
 import {
   getFirestore,
   doc,
@@ -74,9 +76,26 @@ export const createUserDocumentFromAuth  = async(userAuth: User,
   }
 
   // if user data exists
-  return userDoc;
+  return userSnapshot;
 }
 
 export const createAuthUserWithEmailAndPassword = async(email: string, password:string) => {
   return await createUserWithEmailAndPassword(auth, email, password)
+}
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth)
+      },
+      reject
+    )
+  })
+}
+
+export const signOutUser = async() => {
+  await signOut(auth);
 }
