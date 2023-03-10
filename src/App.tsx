@@ -23,7 +23,7 @@ const App = () => {
     <CssBaseline/>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={user ? <Home/>: (<Navigate replace to={'/auth'}/> )}/>
+        <Route path='/' element={user ? (<Home/>): <Authentication/>}/>
         <Route path='/auth' element={<Authentication/>} />
         <Route path='/register' element={<Registration/>}/>
       </Routes>

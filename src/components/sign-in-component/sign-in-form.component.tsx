@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import { useDispatch } from "react-redux";
+import { googleSignInStart } from "../../store/user/user.actions";
 
 // types for initial form values
 type InitialSignInValues = {
@@ -29,8 +30,9 @@ export const SignIn = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleGoogleSignIn = () => {
+    const handleGoogleSignIn = async() => {
         // dispatch googleSignInStart action creator
+        dispatch(googleSignInStart())
     }
 
     const handleSignIn = async() => {
@@ -99,7 +101,7 @@ export const SignIn = () => {
                     </Button>
                 </Grid>
                 <Grid item xs ={12} textAlign="center">
-                    <IconButton onClick={handleGoogleSignIn}>
+                    <IconButton type="button" onClick={handleGoogleSignIn}>
                     <Google 
                         sx={{color: "red", fontSize: "2.5rem"}}/>
                     </IconButton>
