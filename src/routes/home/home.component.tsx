@@ -1,8 +1,12 @@
-import { signOutUser } from "../../utils/firebase.utils"
+import { useDispatch } from "react-redux"
+import { signOutStart } from "../../store/user/user.actions";
 
 
 export const Home = () => {
-    const signOutHandler = async() => await signOutUser()
+    const dispatch = useDispatch();
+    
+
+    const signOutHandler = async() => dispatch(signOutStart())
 
     return (
         <div>

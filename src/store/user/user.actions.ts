@@ -15,3 +15,6 @@ export const emailSignInStart = createAction('user/EMAIL_SIGN_IN_START');
 
 export const signInFailed = createAction('user/SIGN_IN_FAILED');
 
+export const signOutStart = createAction('user/SIGN_OUT_START');
+
+export const signOutFailed = createAction('user/SIGN_OUT_FAILED')

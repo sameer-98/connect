@@ -1,7 +1,7 @@
 import {all, call, put, takeLatest} from 'redux-saga/effects'
-import { getCurrentUser, createUserDocumentFromAuth, signInWithGooglePopup } from '../../utils/firebase.utils'
-import { checkUserSessions, googleSignInStart, signInFailed } from './user.actions'
-import { signInSuccess } from './user.reducer'
+import { getCurrentUser, createUserDocumentFromAuth, signInWithGooglePopup, signOutUser } from '../../utils/firebase.utils'
+import { checkUserSessions, googleSignInStart, signInFailed, signOutFailed, signOutStart } from './user.actions'
+import { signInSuccess, signOutSuccess } from './user.reducer'
 
 export function* getUserSnapShotFromAuth(userAuth, additionalDetails){
     
@@ -21,7 +21,7 @@ export function* googleSignIn({payload}){
         const {user} = yield call (signInWithGooglePopup);
         if(!user) return;
         yield call(getUserSnapShotFromAuth, user)
-        payload.navigate('/')
+        payload.navigate('/home')
 
     }
     catch(error){
@@ -42,6 +42,19 @@ catch(error){
     
 }
 
+export function* signOut(){
+    try {
+        yield call (signOutUser);
+        yield put(signOutSuccess())
+    } catch (error) {
+        yield put(signOutFailed(error))
+    }
+}
+
+export function* onSignOutStart(){
+    yield takeLatest(signOutStart,signOut)
+}
+
 export function* onGoogleSignInStart(){
     yield takeLatest(googleSignInStart,googleSignIn)
 }
@@ -53,6 +66,7 @@ export function* onCheckUserSession(){
 export function* userSaga(){
     yield all([
         call(onCheckUserSession),
-        call(onGoogleSignInStart)
+        call(onGoogleSignInStart),
+        call(onSignOutStart)
     ])
 }

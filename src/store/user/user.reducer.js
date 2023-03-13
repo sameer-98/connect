@@ -1,6 +1,6 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 
-import { emailSignInStart, googleSignInStart } from "./user.actions";
+import { emailSignInStart, googleSignInStart, signInFailed, signOutFailed } from "./user.actions";
 
 // create type for initial stae 
 
@@ -25,6 +25,10 @@ const userSlice = createSlice({
         signInFailed: (state, action) => {
             state.error = action.payload;
             state.isLoading = false
+        },
+        signOutSuccess: (state, action) => {
+            state.currentUser = null;
+            state.isLoading = false
         }
     },
     extraReducers: (builder) => {
@@ -36,11 +40,15 @@ const userSlice = createSlice({
             }
         )
         .addMatcher(
-            isAnyOf()
+            isAnyOf(signInFailed, signOutFailed),
+            (state, action) => {
+                state.error = action.payload;
+                state.isLoading = false;
+            }
         )
     }
 })
 
-export const {signInSuccess} = userSlice.actions
+export const {signInSuccess, signOutSuccess} = userSlice.actions
 
 export const userReducer = userSlice.reducer
