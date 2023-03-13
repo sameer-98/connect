@@ -1,31 +1,35 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Authentication } from './routes/authentication/authentication.component';
 import { Registration } from './routes/register/registration.component';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { themeSettings } from './theme';
-import { selectCurrentMode, selectCurrentUser } from './store/state.selector';
+import { selectCurrentMode } from './store/state.selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { Home } from './routes/home/home.component';
 import { checkUserSessions } from './store/user/user.actions';
+import { ProtectedRoutes } from './components/ProtectedRoutes';
 
 const App = () => {
   const mode = useSelector(selectCurrentMode)
   const theme = createTheme(themeSettings(mode))
   const dispatch = useDispatch()
-  const user = useSelector(selectCurrentUser)
+  
   useEffect(() => {
     dispatch(checkUserSessions())
   },[dispatch])
- 
+  
+
   return (
   <ThemeProvider theme={theme}>
     <CssBaseline/>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={user ? (<Home/>): <Authentication/>}/>
-        <Route path='/auth' element={<Authentication/>} />
-        <Route path='/register' element={<Registration/>}/>
+        <Route element={<ProtectedRoutes/>}>
+          <Route element={<Home/>} path='/'/>
+        </Route>
+        <Route element={<Authentication/>} path='/auth' />
+        <Route element={<Registration/>} path='/register'/>
       </Routes>
     </BrowserRouter>
   </ThemeProvider>

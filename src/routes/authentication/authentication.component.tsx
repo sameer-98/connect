@@ -6,10 +6,8 @@ export const Authentication = () => {
     const theme = useTheme()
     const isNonMobileScreens = useMediaQuery('(min-width: 1000px)')
     
-
-    
    return (
-   <div>
+        <div>
         <Navigation/>
         <Box>
             <Box
@@ -33,5 +31,7 @@ export const Authentication = () => {
             <SignIn/>
             </Box>
         </Box>
-    </div>)
+    </div>
+    )
+   
 }

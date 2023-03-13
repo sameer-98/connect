@@ -9,17 +9,19 @@ export function* getUserSnapShotFromAuth(userAuth, additionalDetails){
         const userSnapShot = yield call(createUserDocumentFromAuth, userAuth, additionalDetails)
         console.log(userSnapShot.data())
         yield put(signInSuccess({id: userSnapShot.id, ...userSnapShot.data()}))
+        
     }
     catch(error){
         yield put(signInFailed(error))
     }
 }
 
-export function* googleSignIn(){
+export function* googleSignIn({payload}){
     try{
         const {user} = yield call (signInWithGooglePopup);
         if(!user) return;
         yield call(getUserSnapShotFromAuth, user)
+        payload.navigate('/')
 
     }
     catch(error){
@@ -41,11 +43,11 @@ catch(error){
 }
 
 export function* onGoogleSignInStart(){
-    yield takeLatest('user/GOOGLE_SIGN_IN_START',googleSignIn)
+    yield takeLatest(googleSignInStart,googleSignIn)
 }
 
 export function* onCheckUserSession(){
-    yield takeLatest('user/CHECK_USER_SESSION',isUserAuthenticated)
+    yield takeLatest(checkUserSessions,isUserAuthenticated)
 }
 
 export function* userSaga(){

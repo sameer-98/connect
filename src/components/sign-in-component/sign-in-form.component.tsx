@@ -30,14 +30,16 @@ export const SignIn = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const handleGoogleSignIn = async() => {
+    const handleGoogleSignIn = () => {
         // dispatch googleSignInStart action creator
-        dispatch(googleSignInStart())
+        dispatch(googleSignInStart(navigate))
+        
+       
     }
 
-    const handleSignIn = async() => {
-        // dispatch signInStart action creator 
-    }
+    // const handleSignIn = async() => {
+    //     // dispatch signInStart action creator 
+    // }
     
     // Use formik to handle forms
     const formik = useFormik({

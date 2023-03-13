@@ -35,6 +35,9 @@ const userSlice = createSlice({
                 state.isLoading = true
             }
         )
+        .addMatcher(
+            isAnyOf()
+        )
     }
 })
 
